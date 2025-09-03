@@ -56,5 +56,13 @@ public class PosMachine {
         return receiptItems;
     }
 
+    public static Integer calculateTotal(List<ReceiptItem> receiptItems){
+        Integer total = 0;
+        for (ReceiptItem receiptItem : receiptItems) {
+            total += receiptItem.getSubtotal();
+        }
+        return total;
+    }
+
 
 }
