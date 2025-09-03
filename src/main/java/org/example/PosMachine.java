@@ -24,6 +24,8 @@ public class PosMachine {
         barcodes.add("ITEM000004");
     }
 
+
+
     public static boolean checkBarCode(List<String> barcodes) {
         for (String barcode : barcodes) {
             if (barcode.equalsIgnoreCase("item000000")
@@ -62,6 +64,23 @@ public class PosMachine {
             total += receiptItem.getSubtotal();
         }
         return total;
+    }
+
+    public static String createReceipt(List<ReceiptItem> receiptItems, Integer total){
+        StringBuilder receipt = new StringBuilder();
+        receipt.append("***<store earning no money>Receipt ***\n");
+        for (ReceiptItem receiptItem : receiptItems) {
+            if(receiptItem.getQuantity() > 0){
+                receipt.append("Name: ").append(receiptItem.getName())
+                        .append(", Quantity: ").append(receiptItem.getQuantity())
+                        .append(", Unit price: ").append(receiptItem.getUnitPrice()).append(" (yuan)")
+                        .append(", Subtotal: ").append(receiptItem.getSubtotal()).append(" (yuan)\n");
+            }
+        }
+        receipt.append("----------------------\n");
+        receipt.append("Total: ").append(total).append(" (yuan)\n");
+        receipt.append("**********************");
+        return receipt.toString();
     }
 
 
