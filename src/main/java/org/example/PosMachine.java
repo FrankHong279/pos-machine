@@ -24,6 +24,13 @@ public class PosMachine {
         barcodes.add("ITEM000004");
     }
 
+    public static String getReceiptFormBarcodes(List<String> barcodes){
+        if(!checkBarCode(barcodes)){
+            return null;
+        }
+        List<ReceiptItem> receiptItems = transferToReceiptItem(barcodes);
+        return createReceipt(receiptItems);
+    }
 
 
     public static boolean checkBarCode(List<String> barcodes) {
@@ -66,7 +73,8 @@ public class PosMachine {
         return total;
     }
 
-    public static String createReceipt(List<ReceiptItem> receiptItems, Integer total){
+    public static String createReceipt(List<ReceiptItem> receiptItems){
+        Integer total = calculateTotal(receiptItems);
         StringBuilder receipt = new StringBuilder();
         receipt.append("***<store earning no money>Receipt ***\n");
         for (ReceiptItem receiptItem : receiptItems) {
