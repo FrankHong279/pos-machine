@@ -22,6 +22,7 @@ public class PosMachine {
         barcodes.add("ITEM000004");
         barcodes.add("ITEM000004");
         barcodes.add("ITEM000004");
+        System.out.println(getReceiptFormBarcodes(barcodes));
     }
 
     public static String getReceiptFormBarcodes(List<String> barcodes){
