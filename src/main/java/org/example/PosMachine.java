@@ -27,13 +27,13 @@ public class PosMachine {
 
     public static String getReceiptFormBarcodes(List<String> barcodes){
         if(!checkBarCode(barcodes)){
-            return null;
+            throw new IllegalArgumentException("Barcodes are not valid");
         }
         List<ReceiptItem> receiptItems = transferToReceiptItem(barcodes);
         return createReceipt(receiptItems);
     }
 
-
+    //TODO refactor：use a set to store valid barcodes
     public static boolean checkBarCode(List<String> barcodes) {
         for (String barcode : barcodes) {
             if (barcode.equalsIgnoreCase("item000000")
@@ -46,6 +46,7 @@ public class PosMachine {
         return true;
     }
 
+    //TODO refactor： use a map to store items
     public static List<ReceiptItem> transferToReceiptItem(List<String> barcodes){
         List<ReceiptItem> receiptItems = new ArrayList<>();
         receiptItems.add(new ReceiptItem("Coca-Cola", 0, 3, 0));
